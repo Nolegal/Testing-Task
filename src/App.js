@@ -3,14 +3,16 @@ import data from './assets/data'
 import './App.css';
 
 function App() {
+  const [arrs, SetArrs] = useState(data)
+  const [arrays, SetArrays] = useState(data)
   const [array, SetArray] = useState(data)
   const [list, SetList] = useState('')
   const NameSort = () => {
-    SetArray(array.sort((a, b) => parseInt(a.name) - parseInt(b.name)));
+    SetArrs(arrs.sort((a, b) => a.name - b.name));
 
   };
   const Pages = () => {
-    SetArray(array.sort((a, b) => parseInt(a.pageviews) - parseInt(b.pageviews)));
+    SetArrays(arrays.sort((a, b) => a.pageviews - b.pageviews));
 
   };
 
