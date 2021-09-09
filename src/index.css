@@ -26,3 +26,19 @@ justify-content:space-around;
 .row .block img{
 width: 10px;
 }
+
+.paginationBttns{
+  width:80%;
+  height:40px;
+  list-style:none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a{
+  padding: 10px;
+  margin:8px;
+  border-radius:5px;
+  border:1px solid 2b2eff;
+  cursor:pointer
+}

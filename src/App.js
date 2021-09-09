@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import data from './assets/data'
 import './App.css';
-import Pagination from './Components/Pagination'
+import ReactPaginate from 'react-paginate';
+
 function App() {
   const [arrs, SetArrs] = useState(data)
   const [arrays, SetArrays] = useState(data)
+
   const [array, SetArray] = useState(data)
   const [list, SetList] = useState('')
 
+
   const [currentPage, SetCurrentPage] = useState(1)
-  const [namePerPage] = useState(10)
-
+  const namePerPage = 10
   const lastNameIndex = currentPage * namePerPage
-  const firstNameIndex = lastNameIndex - namePerPage
-
-  const currentName = array.slice(firstNameIndex, lastNameIndex)
-
-  const paginate = pageNumber => SetCurrentPage(pageNumber)
+  const pageCount = Math.ceil(array.length / namePerPage)
+  const changePage = ({ selected }) => {
+    SetCurrentPage(selected)
+  }
 
   const NameSort2 = () => {
     const NameSort = arrs.sort((a, b) => { return a.name > b.name ? 1 : -1 }
@@ -50,7 +51,7 @@ function App() {
         />
         <button onClick={NameSort2}>Имя</button>
         <button onClick={Pages2}>Просмотры </button>
-        {currentName.map((data) => (
+        {array.slice(lastNameIndex, lastNameIndex + namePerPage).map((data) => (
           <div className="block" key={data.name}>
             <div> {data.name}
 
@@ -72,24 +73,21 @@ function App() {
         )
 
         )}
-
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          previousLinkClassName={"previousBttn"}
+          nextLinkClassName={"nexiBttn"}
+        />
       </div>
 
-      <Pagination
-        namePerPage={namePerPage}
-        totalNames={array.length}
-        paginate={paginate}
-      />
+
     </>
   );
 }
 
 export default App;
-/*
- <Pagination
-        namePerPage={namePerPage}
-        totalNames={array.length}
-        paginate={paginate}
-      />
 
- */
